@@ -7,11 +7,11 @@
 
     Private Sub TextBox1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TextBox1.TextChanged
         If TextBox1.Text <> "" Then
-            查詢Google()
             查詢百度()
             查詢百度百科()
             查詢Yahoo()
             查詢Bing()
+            查詢Google()
             'Me.TextBox1.Copy()
             'Clipboard.SetText(Replace(TextBox1.Text, "%20", " "))
             Clipboard.SetText(TextBox1.Text)

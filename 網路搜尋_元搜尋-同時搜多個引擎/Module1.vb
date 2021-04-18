@@ -2,15 +2,30 @@
     'Public dbCompactDatabase As Boolean
     Public pID As Integer ', db As DAO.Database, od As New DAO.DBEngine
 
+    Private browserAppValue As String
+    Public ReadOnly Property BrowserApp() As String
+        Get
+            browserAppValue = DefaultBrowser()
+            If Not browserAppValue.IndexOf("iexplore") > -1 Then
+                Return browserAppValue
+            Else
+                Dim bApp As New BrowserChrome
+                Return bApp.ChromeAppFileName
+            End If
+        End Get
+    End Property
+
     Sub 查詢百度百科() '2008/12/23 Ctrl+F1 '因為百科內字號別名資料不少 ;今加國學'12/28
         Dim baidu As String
         baidu = 查詢字串轉換_網路碼(Form1.TextBox1.Text) '查詢字串轉換_百度碼(Form1.TextBox1.Text) 'baidu = 查詢字串轉換_百度碼(Screen.ActiveControl.seltext)
+        BrowserOps.openUrl(BrowserApp,
+            "http://baike.baidu.com/w?&word=" & baidu)
         ' ''FollowHyperlink "http://baike.baidu.com/notexists", , , , "word=" & baidu, msoMethodGet
         ' ''FollowHyperlink "http://baike.baidu.com/w", , , , "ct=17&lm=0&tn=baiduWikiSearch&pn=0&rn=10&word=" & baidu & "&submit=search", msoMethodGet
         ' ''FollowHyperlink "http://guoxue.baidu.com/s", , , , "tn=baiduguoxue&ie=gb2312&bs=&cl=3&wd=" & baidu & "&si=guoxue.baidu.com&ct=2097152", msoMethodGet
 
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/notexists?word=" & baidu))
-        Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/w?&word=" & baidu))
+        'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/w?&word=" & baidu))
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/search/none?word=" & baidu & "&pn=0&rn=10&enc=utf8"))
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/search/none?word=" & baidu & "&pn=0&rn=10&enc=utf8"))
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://baike.baidu.com/w?ct=17&lm=0&tn=baiduWikiSearch&pn=0&rn=10&word=" & baidu & "&submit=search"))
@@ -22,13 +37,16 @@
         Dim baidu As String
         'baidu = Form1.TextBox1.Text '新百度碼實則已採用網路碼了
         baidu = 查詢字串轉換_網路碼(Form1.TextBox1.Text) '查詢字串轉換_百度碼(Form1.TextBox1.Text)
-        Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.baidu.com/s?&wd=" & baidu))
+        BrowserOps.openUrl(BrowserApp, "http://www.baidu.com/s?&wd=" & baidu)
+        'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.baidu.com/s?&wd=" & baidu))
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=" & baidu & "&rsv_pq=808cafa70002b1f5&rsv_t=86e2wQLHYztZWmhzpgxdUc4SV52Z47aJocHjNCt1NLpUxjoggzxXt2Cr1t0&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug2=0&inputT=450&rsv_sug4=1271"))
 
     End Sub
     Sub 查詢Bing()
         On Error GoTo ErrMsg
-        Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.bing.com/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
+        BrowserOps.openUrl(BrowserApp,
+             "http://www.bing.com/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text))
+        'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.bing.com/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
         'Form1.TextBox1.Copy()
         Exit Sub
 ErrMsg:
@@ -41,7 +59,9 @@ ErrMsg:
     End Sub
     Sub 查詢Yahoo()
         On Error GoTo ErrMsg
-        Shell(Replace(GetDefaultBrowserEXE, """%1", "https://tw.search.yahoo.com/search?p=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
+        BrowserOps.openUrl(BrowserApp,
+            "https://tw.search.yahoo.com/search?p=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text))
+        'Shell(Replace(GetDefaultBrowserEXE, """%1", "https://tw.search.yahoo.com/search?p=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
         'Form1.TextBox1.Copy()
         Exit Sub
 ErrMsg:
@@ -54,11 +74,14 @@ ErrMsg:
     End Sub
     Sub 查詢Google() '快速鍵'Ctrl+shift+g
         On Error GoTo ErrMsg
+        BrowserOps.openUrl(BrowserApp,
+            "http://www.google.com.tw/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text))
+
         ''FollowHyperlink "http://tw.search.yahoo.com/search", , , , "fr=slv1-ptec&p=" & Screen.ActiveControl.seltext
         ''FollowHyperlink "http://www.google.com.tw/search", , , , "q=" & Screen.ActiveControl.seltext, msoMethodGet
         ''Shell Replace(GetDefaultBrowserEXE, """%1", "http://www.google.com.tw/search?q=" & Screen.ActiveControl.seltext)
         ''If Tasks.Exists("skqs professional version") Then
-        pID = Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.google.com.tw/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
+        'pID = Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.google.com.tw/search?q=" & 查詢字串轉換_網路碼(Form1.TextBox1.Text)))
         'Else
         ''    'Shell "C:\Program Files\Opera\opera.exe" & " http://www.google.com.tw/search?q=" & Screen.ActiveControl.seltext
         ''    Shell "C:\Program Files\Opera\opera.exe" & " http://www.google.com.tw/search?q=" & Screen.ActiveControl.seltext, vbNormalFocus
