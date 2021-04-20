@@ -19,7 +19,7 @@
         Dim baidu As String
         baidu = 查詢字串轉換_網路碼(Form1.TextBox1.Text) '查詢字串轉換_百度碼(Form1.TextBox1.Text) 'baidu = 查詢字串轉換_百度碼(Screen.ActiveControl.seltext)
         BrowserOps.openUrl(BrowserApp,
-            "http://baike.baidu.com/w?&word=" & baidu)
+            "https://baike.baidu.com/item/" & baidu)
         ' ''FollowHyperlink "http://baike.baidu.com/notexists", , , , "word=" & baidu, msoMethodGet
         ' ''FollowHyperlink "http://baike.baidu.com/w", , , , "ct=17&lm=0&tn=baiduWikiSearch&pn=0&rn=10&word=" & baidu & "&submit=search", msoMethodGet
         ' ''FollowHyperlink "http://guoxue.baidu.com/s", , , , "tn=baiduguoxue&ie=gb2312&bs=&cl=3&wd=" & baidu & "&si=guoxue.baidu.com&ct=2097152", msoMethodGet
@@ -37,7 +37,7 @@
         Dim baidu As String
         'baidu = Form1.TextBox1.Text '新百度碼實則已採用網路碼了
         baidu = 查詢字串轉換_網路碼(Form1.TextBox1.Text) '查詢字串轉換_百度碼(Form1.TextBox1.Text)
-        BrowserOps.openUrl(BrowserApp, "http://www.baidu.com/s?&wd=" & baidu)
+        BrowserOps.openUrl(BrowserApp, "https://www.baidu.com/s?&wd=" & baidu)
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.baidu.com/s?&wd=" & baidu))
         'Shell(Replace(GetDefaultBrowserEXE, """%1", "http://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=" & baidu & "&rsv_pq=808cafa70002b1f5&rsv_t=86e2wQLHYztZWmhzpgxdUc4SV52Z47aJocHjNCt1NLpUxjoggzxXt2Cr1t0&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug2=0&inputT=450&rsv_sug4=1271"))
 
