@@ -14,8 +14,8 @@ Public Class BrowserChrome
             Registry.GetValue("HKEY_CURRENT_USER" + ChromeAppKey,
                     "", Nothing), caf) 'https://bit.ly/3gxttQR
             If ChromeAppFileName Is Nothing Then
-                Const chromeFullname = "C:\Program Files (x86)\
-                                Google\Chrome\Application\chrome.exe"
+                Const chromeFullname = "C:\Program Files (x86)\" +
+                                "Google\Chrome\Application\chrome.exe"
                 '"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
                 If File.Exists(chromeFullname) Then Return chromeFullname
             End If
