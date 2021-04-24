@@ -8,11 +8,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3449B952-0AD3-4214-B908-785BB7F78F1F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>網路搜尋_元搜尋_同時搜多個引擎.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>網路搜尋_元搜尋_同時搜多個引擎</RootNamespace>
     <AssemblyName>網路搜尋_元搜尋-同時搜多個引擎</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
