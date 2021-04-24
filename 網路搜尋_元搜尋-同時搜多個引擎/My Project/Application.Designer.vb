@@ -33,7 +33,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.網路搜尋_元搜尋_同時搜多個引擎.Form1
+            'Me.MainForm = Global.網路搜尋_元搜尋_同時搜多個引擎.Form1
 
         End Sub
     End Class

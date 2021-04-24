@@ -8,6 +8,7 @@
         查詢Yahoo()
         查詢Bing()
         查詢Google()
+        End
     End Sub
     Sub 查詢百度百科() '2008/12/23 Ctrl+F1 '因為百科內字號別名資料不少 ;今加國學'12/28
         Dim baidu As String

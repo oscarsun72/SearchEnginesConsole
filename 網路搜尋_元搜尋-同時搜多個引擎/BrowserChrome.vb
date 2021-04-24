@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Win32
+﻿Imports System.IO
+Imports Microsoft.Win32
 Public Class BrowserChrome
 
     'https://gist.github.com/fredrikhaglund/43aea7522f9e844d3e7b
@@ -12,6 +13,10 @@ Public Class BrowserChrome
             ChromeAppFileName = IIf(caf Is Nothing,
             Registry.GetValue("HKEY_CURRENT_USER" + ChromeAppKey,
                     "", Nothing), caf) 'https://bit.ly/3gxttQR
+            If ChromeAppFileName Is Nothing Then
+                Const chromeFullname = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+                If File.Exists(chromeFullname) Then Return chromeFullname
+            End If
         End Get
     End Property
 
