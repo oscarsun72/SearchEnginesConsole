@@ -16,6 +16,7 @@ Public Class BrowserChrome
             If ChromeAppFileName Is Nothing Then
                 Const chromeFullname = "C:\Program Files (x86)\
                                 Google\Chrome\Application\chrome.exe"
+                '"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
                 If File.Exists(chromeFullname) Then Return chromeFullname
             End If
         End Get
