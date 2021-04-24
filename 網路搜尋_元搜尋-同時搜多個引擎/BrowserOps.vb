@@ -1,6 +1,14 @@
 ﻿Imports Microsoft.Win32
 
 Module BrowserOps 'VB 的Module 應就類似 C的 Struct 所預設都是 Public 權限
+    Function GetDefaultBrowserEXE() '2010/10/18由http://chijanzen.net/wp/?p=156#comment-1303(取得預設瀏覽器(default web browser)的名稱? chijanzen 雜貨舖)而來.
+        Dim objShell
+        objShell = CreateObject("WScript.Shell")
+        'HKEY_CLASSES_ROOT\HTTP\shell\open\ddeexec\Application
+        '取得註冊表中的值
+        GetDefaultBrowserEXE = objShell.RegRead _
+                ("HKCR\http\shell\open\command\")
+    End Function
 #Region "預設瀏覽器"
     'https://ithelp.ithome.com.tw/questions/10197561
     'Property Statement:https://docs.microsoft.com/zh-tw/dotnet/visual-basic/language-reference/statements/property-statement
@@ -37,4 +45,18 @@ Module BrowserOps 'VB 的Module 應就類似 C的 Struct 所預設都是 Public 
     Sub openUrl(browserFullName As String, url As String)
         Process.Start(browserFullName, url)
     End Sub
+
+    Private browserAppValue As String
+    Public ReadOnly Property BrowserApp() As String
+        Get
+            browserAppValue = DefaultBrowser()
+            If Not browserAppValue.IndexOf("iexplore") > -1 Then
+                Return browserAppValue
+            Else
+                Dim bApp As New BrowserChrome
+                Return bApp.ChromeAppFileName
+            End If
+        End Get
+    End Property
+
 End Module
